@@ -3,9 +3,6 @@
 
 #include <string>
 #include <vector>
-#define MAX_GENES 100
-#define MAX_ITENS 20
-#define MAX_CROMOSSOMOS 100
 
 using namespace std;
 
