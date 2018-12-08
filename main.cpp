@@ -2,6 +2,9 @@
 #include "funcoes.h"
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <sstream>
+#include <list>
 
 #include <cstring>
 #include <locale.h>
