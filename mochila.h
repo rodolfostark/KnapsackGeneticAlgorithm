@@ -15,6 +15,14 @@ struct Item
     int beneficio;
     float peso;
 };
+struct ConfigBag
+{
+    float peso_suportado;
+    int populacao;
+    int qt_itens;
+    int timeout_sec;
+
+};
 
 class Mochila
 {
