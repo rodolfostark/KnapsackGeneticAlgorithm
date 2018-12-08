@@ -12,6 +12,29 @@ struct Item
     int beneficio;
     float peso;
 };
+struct ItemString
+{
+    string nome;
+    string beneficio;
+    string peso;
+};
+struct ConfigBag
+{
+    float peso_suportado;
+    int populacao;
+    int qt_itens;
+    int timeout_sec;
+
+};
+
+struct ConfigBagString
+{
+    string peso_suportado;
+    string populacao;
+    string qt_itens;
+    string timeout_sec;
+
+};
 
 class Mochila
 {
