@@ -8,5 +8,7 @@
 int random_num(int start, int end);
 bool operator <(const Mochila &m1, const Mochila &m2);
 vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], ConfigBag config, float &peso);
+void imprimir_itens(Item itens[MAX_ITENS], int tamanho);
+void imprimir_config(ConfigBag configuracoes);
 
 #endif // FUNCOES_H
