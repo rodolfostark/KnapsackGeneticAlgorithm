@@ -37,9 +37,18 @@ void Mochila::setFitness()
     float peso = 0;
     int beneficio = 0;
     for(int i = 0; i < len; ++i){
-        peso += cromossomo[i].peso;
-        beneficio += cromossomo[i].beneficio;
+        peso += 0.5 * cromossomo[i].peso;
+        beneficio +=2 * cromossomo[i].beneficio;
     }
     this->fitness = beneficio/peso;
 }
 
+void Mochila::setPeso()
+{
+    int len = cromossomo.size();
+    float peso = 0;
+    for(int i = 0; i < len; ++i){
+        peso += cromossomo[i].peso;
+    }
+    this->peso = peso;
+}

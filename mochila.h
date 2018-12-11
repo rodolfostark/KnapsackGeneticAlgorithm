@@ -41,10 +41,12 @@ class Mochila
 public:
     vector<Item> cromossomo;
     float fitness;
+    float peso;
     Mochila(vector<Item> _cromossomo);
     Mochila crossover(Mochila m2);
     Item mutacao(vector<Item> _cromossomo);
     void setFitness();
+    void setPeso();
 };
 
 #endif // MOCHILA_H

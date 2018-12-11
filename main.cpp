@@ -25,7 +25,7 @@ int main()
     int qt_itens = 0;
 
     ifstream arquivoConfig;
-    arquivoConfig.open("/home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/config.txt");
+    arquivoConfig.open("/home/john/workspace/BagGA/config.txt");
     while(arquivoConfig.good())
     {
         ConfigBagString config_bag;
@@ -47,7 +47,7 @@ int main()
         arquivoConfig.close();
     }
     ifstream arquivoItens;
-    arquivoItens.open("/home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/lista_itens.txt");
+    arquivoItens.open("/home/john/workspace/BagGA/lista_itens.txt");
     while(arquivoItens.good()){
         ItemString item_string;
         getline(arquivoItens,item_string.nome,',');
@@ -91,6 +91,7 @@ int main()
             Mochila deCrianca2 = populacao[r];
             Mochila belzebu = deCrianca1.crossover(deCrianca2);
             belzebu.setFitness();
+            belzebu.setPeso();
             nova_populacao.push_back(belzebu);
         }
         populacao = nova_populacao;
@@ -100,7 +101,7 @@ int main()
     int cromo_len = populacao[0].cromossomo.size();
     for(int i = 0; i < 100; ++i){
         cout << "======SOLUÇÃO======" << endl;
-        cout << "Mochila " << i <<", Fitness: " << populacao[i].fitness << endl;
+        cout << "Mochila " << i <<", Fitness: " << populacao[i].fitness << ", Peso: "<< populacao[i].peso<< endl;
         for(int j = 0; j < cromo_len-1; ++j){
             cout << "Nome: " << populacao[i].cromossomo[j].nome << endl;
             cout << "Peso: " << populacao[i].cromossomo[j].peso << endl;
