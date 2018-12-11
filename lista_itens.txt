@@ -1,9 +1,9 @@
-canivete,1,1
-agua,3,2
-barra de cereal,1,1
-corda,3,1
-lencol,2,2
-barraca,4,3
+canivete,5,1
+agua,3,1
+barra de cereal,3,2
+corda,3,2
+lencol,1,2
+barraca,4,5
 energetico,2,2
 camisa,1,1
 calça,1,1

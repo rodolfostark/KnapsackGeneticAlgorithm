@@ -16,6 +16,7 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
+    srand(time(NULL));
 
     ConfigBag config[10];
     Item itens[MAX_ITENS];
@@ -71,13 +72,11 @@ int main()
     int numero_iteracoes = 0;
     vector<Mochila> populacao;
     for(int i = 0;i < POPULACAO_MAX; ++i){
-        for(int j = 0; j < qt_config; ++j){
-            Mochila deCrianca(gerarCromossomo(itens, qt_itens-1));
-            deCrianca.setFitness();
-            populacao.push_back(deCrianca);
-        }
+        Mochila deCrianca(gerarCromossomo(itens, qt_itens-1));
+        deCrianca.setFitness();
+        populacao.push_back(deCrianca);
     }
-    while(numero_iteracoes < 100){
+    while(numero_iteracoes < 20){
         sort(populacao.begin(), populacao.end());
         vector<Mochila> nova_populacao;
         int s = (10*POPULACAO_MAX)/100;
@@ -88,24 +87,27 @@ int main()
         for(int i = 0;i < s;i++){
             int r = random_num(0, 50);
             Mochila deCrianca1 = populacao[r];
-            r = random_num(0, 50);
+            r = random_num(50, 99);
             Mochila deCrianca2 = populacao[r];
             Mochila belzebu = deCrianca1.crossover(deCrianca2);
+            belzebu.setFitness();
             nova_populacao.push_back(belzebu);
         }
         populacao = nova_populacao;
         numero_iteracoes++;
     }
-        int pop_len = populacao.size();
-        int cromo_len = populacao[0].cromossomo.size();
-        for(int i = 0; i < pop_len-1; i++){
-            cout << "=================================" << endl;
-            for(int j = 0; j < cromo_len-1; ++j){
-                cout << "Nome: " << populacao[i].cromossomo[j].nome << endl;
-                cout << "Peso: " << populacao[i].cromossomo[j].peso << endl;
-            }
-            cout << "Fitness: " << populacao[0].fitness << endl;
+    int pop_len = populacao.size();
+    int cromo_len = populacao[0].cromossomo.size();
+    for(int i = 0; i < 100; ++i){
+        cout << "======SOLUÇÃO======" << endl;
+        cout << "Mochila " << i <<", Fitness: " << populacao[i].fitness << endl;
+        for(int j = 0; j < cromo_len-1; ++j){
+            cout << "Nome: " << populacao[i].cromossomo[j].nome << endl;
+            cout << "Peso: " << populacao[i].cromossomo[j].peso << endl;
+            cout << "Beneficio: " << populacao[i].cromossomo[j].beneficio << endl;
         }
+        cout << "====================" << endl;
+    }
 
     return 0;
 }

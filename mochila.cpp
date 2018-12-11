@@ -40,6 +40,6 @@ void Mochila::setFitness()
         peso += cromossomo[i].peso;
         beneficio += cromossomo[i].beneficio;
     }
-    fitness = beneficio/peso;
+    this->fitness = beneficio/peso;
 }
 
