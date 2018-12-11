@@ -73,14 +73,9 @@ int main()
     vector<Mochila> populacao;
     for(int i = 0;i < POPULACAO_MAX; ++i){
         Mochila deCrianca(gerarCromossomo(itens, qt_itens-1));
-        deCrianca.setRepeticao();
-        deCrianca.setFitness();
-        deCrianca.setPeso();
         populacao.push_back(deCrianca);
-        cout<<"1"<<endl;
     }
     while(numero_iteracoes < 20){
-        cout<<"2"<<endl;
         sort(populacao.begin(), populacao.end());
         vector<Mochila> nova_populacao;
         int s = (10*POPULACAO_MAX)/100;
@@ -94,9 +89,8 @@ int main()
             r = random_num(50, 99);
             Mochila deCrianca2 = populacao[r];
             Mochila belzebu = deCrianca1.crossover(deCrianca2);
-            belzebu.setRepeticao();
-            belzebu.setFitness();
             belzebu.setPeso();
+            belzebu.setFitness();
             nova_populacao.push_back(belzebu);
         }
         populacao = nova_populacao;
