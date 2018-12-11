@@ -66,23 +66,17 @@ int main()
     }
     imprimir_config(config[1]);
     cout << "Itens: "<< endl;
-    //imprimir_itens(itens, qt_itens);
+    imprimir_itens(itens, qt_itens);
     //Até aqui é pré-processamento dos itens e possíveis configurações
-    cout << " foram comentados." << endl;
     int numero_iteracoes = 0;
     vector<Mochila> populacao;
-    for(int i = 0;i < POPULACAO_MAX/qt_config; ++i){
-        float fit = 0;
+    for(int i = 0;i < POPULACAO_MAX; ++i){
         for(int j = 0; j < qt_config; ++j){
-            Mochila deCrianca(gerarCromossomo(itens, qt_itens, fit));
-            deCrianca.fitness = fit;
-            cout << "nome: "  << deCrianca.cromossomo[0].nome << endl;
-            cout << "beneficio: "  << deCrianca.cromossomo[0].beneficio << endl;
-            cout << "fitness: "<< fit << endl;
+            Mochila deCrianca(gerarCromossomo(itens, qt_itens-1));
+            deCrianca.setFitness();
             populacao.push_back(deCrianca);
         }
     }
-    cout << " foram comentados." << endl;
     while(numero_iteracoes < 100){
         sort(populacao.begin(), populacao.end());
         vector<Mochila> nova_populacao;
@@ -99,20 +93,20 @@ int main()
             Mochila belzebu = deCrianca1.crossover(deCrianca2);
             nova_populacao.push_back(belzebu);
         }
-        populacao = nova_populacao;/*
-        cout << "Melhor mochila: " << endl;
+        populacao = nova_populacao;
+        numero_iteracoes++;
+    }
         int pop_len = populacao.size();
         int cromo_len = populacao[0].cromossomo.size();
-        for(int i = 0; i < pop_len; i++){
-            for(int j = 0; j < cromo_len; ++j){
+        for(int i = 0; i < pop_len-1; i++){
+            cout << "=================================" << endl;
+            for(int j = 0; j < cromo_len-1; ++j){
                 cout << "Nome: " << populacao[i].cromossomo[j].nome << endl;
                 cout << "Peso: " << populacao[i].cromossomo[j].peso << endl;
             }
             cout << "Fitness: " << populacao[0].fitness << endl;
-        }*/
-        numero_iteracoes++;
-    }
-    cout << " foram comentados." << endl;
+        }
+
     return 0;
 }
 

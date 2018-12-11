@@ -17,15 +17,13 @@ bool operator <(const Mochila &m1, const Mochila &m2)
     return m1.fitness < m2.fitness;
 }
 
-vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], int qt_itens, float &peso)
+vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], int qt_itens)
 {
     vector<Item> cromossomo;
     int len = qt_itens;
-    for(int i = 0; i < len; i++){
+    for(int i = 0; i < len-1; i++){
         int  index = random_num(0 , len-1);
         cromossomo.push_back(listaItens[index]);
-        peso += listaItens[index].peso;
-
     }
     return cromossomo;
 }
@@ -38,7 +36,7 @@ void imprimir_config(ConfigBag configuracoes)
 }
 
 void imprimir_itens(Item itens[MAX_ITENS], int tamanho){
-    for(int i = 0; i < tamanho; i++){
+    for(int i = 0; i < tamanho-1; i++){
         cout<< itens[i].nome << " / "<< itens[i].beneficio << " / " << itens[i].peso << endl;
     }
 }

@@ -44,6 +44,7 @@ public:
     Mochila(vector<Item> _cromossomo);
     Mochila crossover(Mochila m2);
     Item mutacao(vector<Item> _cromossomo);
+    void setFitness();
 };
 
 #endif // MOCHILA_H

@@ -8,5 +8,3 @@ energetico,2,2
 camisa,1,1
 calça,1,1
 kit de primeiro socorros,3,3
-
-
