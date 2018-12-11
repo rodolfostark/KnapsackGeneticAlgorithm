@@ -42,11 +42,13 @@ public:
     vector<Item> cromossomo;
     float fitness;
     float peso;
+    float repeticao;
     Mochila(vector<Item> _cromossomo);
     Mochila crossover(Mochila m2);
     Item mutacao(vector<Item> _cromossomo);
     void setFitness();
     void setPeso();
+    void setRepeticao();
 };
 
 #endif // MOCHILA_H

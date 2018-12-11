@@ -1,10 +1,16 @@
-canivete,5,1
-agua,3,1
-barra de cereal,3,2
-corda,3,2
+canivete,3,0.1
+agua,2,1
+barra de cereal,1,0.1
+corda,3,0.5
 lencol,1,2
-barraca,4,5
-energetico,2,2
-camisa,1,1
+barraca,3,2
+energetico,1,0.5
+camisa,1,0.3
 calça,1,1
+bota,1,0.4
 kit de primeiro socorros,3,3
+celular,3,0.5
+oculos escuro, 0.5, 0.1
+caneta,0.5,0.1
+bloco de anotações,1,0.1
+
