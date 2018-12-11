@@ -5,11 +5,15 @@
 #include <string>
 #include <sstream>
 #include <list>
-
 #include <cstring>
 #include <locale.h>
 #include <sstream>
 #include <cstdlib>
+#include <vector>
+#include <algorithm>
+
+#define POPULACAO_MAX 100
+#define MAX_ITENS 20
 
 void imprimir_itens(Item i[MAX_ITENS], unsigned tam);
 void imprimir_config(ConfigBag c);
@@ -25,7 +29,7 @@ int main()
 
     int qt_config=0, qt_itens=0;
 
-    ifstream arquivoConfig("/home/john/workspace/BagGA/config.txt");
+    ifstream arquivoConfig("home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/config.txt");
     if(arquivoConfig.is_open())
     {
         while(arquivoConfig.good())
@@ -37,10 +41,10 @@ int main()
             getline(arquivoConfig,t.qt_itens,',');
             getline(arquivoConfig,t.timeout_sec,'\n');
 
-            config[qt_itens].peso_suportado=atof(t.peso_suportado.c_str());
-            config[qt_itens].populacao=atoi(t.populacao.c_str());
-            config[qt_itens].qt_itens=atoi(t.qt_itens.c_str());
-            config[qt_itens].timeout_sec=atoi(t.timeout_sec.c_str());
+            config[qt_itens].peso_suportado = stof(t.peso_suportado.c_str());
+            config[qt_itens].populacao = stoi(t.populacao.c_str());
+            config[qt_itens].qt_itens = stoi(t.qt_itens.c_str());
+            config[qt_itens].timeout_sec = stoi(t.timeout_sec.c_str());
 
             qt_itens++;
 
@@ -52,7 +56,7 @@ int main()
         cout<<"ERRO AO CARREGAR AS CONFIGURAÇÕES!";
     }
 
-    fstream arquivoItens("/home/john/workspace/BagGA/lista_itens.txt");
+    fstream arquivoItens("home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/lista_itens.txt");
     if(arquivoItens.is_open())
     {
         while(arquivoItens.good())
@@ -70,9 +74,9 @@ int main()
                 getline(arquivoItens,i.beneficio,',');
                 getline(arquivoItens,i.peso,'\n');
 
-                itens[qt_itens-3].nome=i.nome;
-                itens[qt_itens-3].beneficio=atoi(i.beneficio.c_str());
-                itens[qt_itens-3].peso=atof(i.peso.c_str());
+                itens[qt_itens-3].nome = i.nome;
+                itens[qt_itens-3].beneficio = stoi(i.beneficio.c_str());
+                itens[qt_itens-3].peso = stof(i.peso.c_str());
             }
 
             qt_itens++;
@@ -93,6 +97,17 @@ int main()
     cout<<"itens:"<<endl;
     imprimir_itens(itens,config[1].qt_itens);
 
+    int numero_iteracoes = 0;
+    vector<Mochila> populacao;
+    for(int i = 0;i < POPULACAO_MAX; i++){
+        Mochila deCrianca(gerarCromossomo(itens, config[i]));
+        populacao.push_back(deCrianca);
+    }
+    while(numero_iteracoes < 500){
+        sort(populacao.begin(), populacao.end());
+        //travei aqui!!!!
+    }
+
     return 0;
 }
 
@@ -106,10 +121,9 @@ void imprimir_config(ConfigBag c)
 
 void imprimir_itens(Item item[MAX_ITENS], unsigned tam){
 
-for(unsigned i=0; i<tam; i++){
+    for(unsigned i=0; i<tam; i++){
 
-    cout<<item[i].nome<<" / "<<item[i].beneficio<<" / "<<item[i].peso<<endl;
+        cout<<item[i].nome<<" / "<<item[i].beneficio<<" / "<<item[i].peso<<endl;
 
-}
-
+    }
 }
