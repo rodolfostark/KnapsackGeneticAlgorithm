@@ -17,10 +17,10 @@ bool operator <(const Mochila &m1, const Mochila &m2)
     return m1.fitness < m2.fitness;
 }
 
-vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], ConfigBag config, float &peso)
+vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], int qt_itens, float &peso)
 {
     vector<Item> cromossomo;
-    int len = config.qt_itens;
+    int len = qt_itens;
     for(int i = 0; i < len; i++){
         int  index = random_num(0 , len-1);
         cromossomo.push_back(listaItens[index]);
@@ -31,10 +31,10 @@ vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], ConfigBag config, float
 }
 void imprimir_config(ConfigBag configuracoes)
 {
-    cout << "Peso suportado pela mochila: "<< configuracoes.peso_suportado<<endl;
-    cout << "Tamanho da população utilizada no algoritmo: "<< configuracoes.populacao<<endl;
-    cout << "Quantidade de itens disponiveis para adicionar na mochila: "<< configuracoes.qt_itens<<endl;
-    cout << "Tempo limite em (s) de execução: "<< configuracoes.timeout_sec<<endl;
+    cout << "Peso suportado pela mochila: "<< configuracoes.peso_suportado<< endl;
+    cout << "Tamanho da população utilizada no algoritmo: "<< configuracoes.populacao<< endl;
+    cout << "Quantidade de itens disponiveis para adicionar na mochila: "<< configuracoes.qt_itens<< endl;
+    cout << "Tempo limite em (s) de execução: "<< configuracoes.timeout_sec << endl;
 }
 
 void imprimir_itens(Item itens[MAX_ITENS], int tamanho){
