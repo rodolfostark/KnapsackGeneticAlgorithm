@@ -34,9 +34,12 @@ Item Mochila::mutacao(vector<Item> _cromossomo)
 void Mochila::setFitness()
 {
     int len = cromossomo.size();
+    float peso = 0;
+    int beneficio = 0;
     for(int i = 0; i < len; ++i){
-        fitness += abs(sqrt(cromossomo[i].peso*cromossomo[i].peso + cromossomo[i].beneficio*cromossomo[i].beneficio));
+        peso += cromossomo[i].peso;
+        beneficio += cromossomo[i].beneficio;
     }
-    //distancia euclidiana entre peso e beneficio
+    fitness = beneficio/peso;
 }
 

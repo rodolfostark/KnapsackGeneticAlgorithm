@@ -14,7 +14,7 @@ int random_num(int start, int end)
 
 bool operator <(const Mochila &m1, const Mochila &m2)
 {
-    return m1.fitness < m2.fitness;
+    return m1.fitness > m2.fitness;
 }
 
 vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], int qt_itens)

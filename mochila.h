@@ -40,7 +40,7 @@ class Mochila
 {
 public:
     vector<Item> cromossomo;
-    int fitness;
+    float fitness;
     Mochila(vector<Item> _cromossomo);
     Mochila crossover(Mochila m2);
     Item mutacao(vector<Item> _cromossomo);
