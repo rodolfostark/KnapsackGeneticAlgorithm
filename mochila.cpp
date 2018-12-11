@@ -41,7 +41,7 @@ void Mochila::setFitness()
         beneficio +=2 * cromossomo[i].beneficio;
     }
 
-    this->fitness = ((beneficio/peso)*100 - this->repeticao*10);
+    this->fitness = (beneficio/peso)*100;
 }
 
 void Mochila::setPeso()
@@ -52,20 +52,4 @@ void Mochila::setPeso()
         peso += cromossomo[i].peso;
     }
     this->peso = peso;
-}
-void Mochila::setRepeticao()
-{
-    int len = cromossomo.size();
-    int rep=0;
-    //contando repetidos
-    for(int i = 0; i < len; ++i){
-        for(int j = 0; j < len; ++i){
-            if(i!=j){
-                if(cromossomo[i].nome==cromossomo[j].nome){
-                    rep++;
-                }
-            }
-        }
-    }
-    this->repeticao = rep;
 }
