@@ -14,13 +14,15 @@ bool operator <(const Mochila &m1, const Mochila &m2)
     return m1.fitness < m2.fitness;
 }
 
-vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], ConfigBag config)
+vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], ConfigBag config, float &peso)
 {
     vector<Item> cromossomo;
     int len = config.qt_itens;
     for(int i = 0; i < len; i++){
         int  index = random_num(0 , len-1);
         cromossomo.push_back(listaItens[index]);
+        peso += listaItens[index].peso;
+
     }
     return cromossomo;
 }

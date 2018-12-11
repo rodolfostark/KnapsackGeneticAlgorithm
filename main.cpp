@@ -3,11 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <sstream>
-#include <list>
-#include <cstring>
 #include <locale.h>
-#include <sstream>
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
@@ -27,9 +23,11 @@ int main()
     ConfigBag config[10];
     Item itens[MAX_ITENS];
 
-    int qt_config=0, qt_itens=0;
+    int qt_config = 0;
+    int qt_itens = 0;
 
-    ifstream arquivoConfig("home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/config.txt");
+    fstream arquivoConfig;
+    arquivoConfig.open("/home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/config.txt");
     if(arquivoConfig.is_open())
     {
         while(arquivoConfig.good())
@@ -49,44 +47,40 @@ int main()
     }
     else
     {
-        cout<<"ERRO AO CARREGAR AS CONFIGURAÇÕES!";
+        cout << "ERRO AO CARREGAR AS CONFIGURAÇÕES!" << endl;
     }
-
-    fstream arquivoItens("home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/lista_itens.txt");
+    fstream arquivoItens;
+    arquivoItens.open("/home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/lista_itens.txt");
     if(arquivoItens.is_open()){
         while(arquivoItens.good()){
-            if(qt_itens==0){
-                qt_itens++;
-                continue;
-            }
-            else{
-                ItemString item_string;
-                getline(arquivoItens,item_string.nome,',');
-                getline(arquivoItens,item_string.beneficio,',');
-                getline(arquivoItens,item_string.peso,'\n');
-                itens[qt_itens-3].nome = item_string.nome;
-                itens[qt_itens-3].beneficio = stoi(item_string.beneficio.c_str());
-                itens[qt_itens-3].peso = stof(item_string.peso.c_str());
-            }
+            ItemString item_string;
+            getline(arquivoItens,item_string.nome,',');
+            getline(arquivoItens,item_string.beneficio,',');
+            getline(arquivoItens,item_string.peso,'\n');
+            itens[qt_itens-3].nome = item_string.nome;
+            itens[qt_itens-3].beneficio = stoi(item_string.beneficio.c_str());
+            itens[qt_itens-3].peso = stof(item_string.peso.c_str());
             qt_itens++;
         }
         //finalizando o vetor ja que nao está usando o push
         itens[qt_itens].nome += '\0';
         arquivoItens.close();
+        cout << "Deu bom" << endl;
     }
-    else
-    {
-        cout<<"ERRO AO CARREGAR OS ITENS!";
+    else{
+        cout<< "ERRO AO CARREGAR OS ITENS!";
     }
     imprimir_config(config[1]);
-    cout<<"itens:"<<endl;
+    cout << "Itens: "<< endl;
     imprimir_itens(itens,config[1].qt_itens);
     //Até aqui é pré-processamento dos itens e possíveis configurações
 
     int numero_iteracoes = 0;
     vector<Mochila> populacao;
     for(int i = 0;i < POPULACAO_MAX; i++){
-        Mochila deCrianca(gerarCromossomo(itens, config[i]));
+        float fit = 0;
+        Mochila deCrianca(gerarCromossomo(itens, config[i], fit));
+        deCrianca.fitness = fit;
         populacao.push_back(deCrianca);
     }
     while(numero_iteracoes < 500){
