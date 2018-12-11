@@ -9,7 +9,7 @@ using namespace std;
 struct Item
 {
     string nome;
-    int beneficio;
+    float beneficio;
     float peso;
 };
 struct ItemString

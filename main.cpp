@@ -54,7 +54,7 @@ int main()
         getline(arquivoItens,item_string.beneficio,',');
         getline(arquivoItens,item_string.peso,'\n');
         itens[qt_itens].nome = item_string.nome.c_str();
-        itens[qt_itens].beneficio = atoi(item_string.beneficio.c_str());
+        itens[qt_itens].beneficio = atof(item_string.beneficio.c_str());
         itens[qt_itens].peso = atof(item_string.peso.c_str());
         qt_itens++;
     }
@@ -77,8 +77,10 @@ int main()
         deCrianca.setFitness();
         deCrianca.setPeso();
         populacao.push_back(deCrianca);
+        cout<<"1"<<endl;
     }
     while(numero_iteracoes < 20){
+        cout<<"2"<<endl;
         sort(populacao.begin(), populacao.end());
         vector<Mochila> nova_populacao;
         int s = (10*POPULACAO_MAX)/100;
