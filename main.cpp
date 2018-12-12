@@ -78,7 +78,7 @@ int main()
         deCrianca.setFitness();
         populacao.push_back(deCrianca);
     }
-    while(numero_iteracoes < 20){
+    while(numero_iteracoes <= 10){
         sort(populacao.begin(), populacao.end());
         vector<Mochila> nova_populacao;
         int s = (10*POPULACAO_MAX)/100;
@@ -89,7 +89,7 @@ int main()
         for(int i = 0;i < s;i++){
             int r = random_num(0, 50);
             Mochila deCrianca1 = populacao[r];
-            r = random_num(50, 99);
+            r = random_num(0, 50);
             Mochila deCrianca2 = populacao[r];
             Mochila belzebu = deCrianca1.crossover(deCrianca2);
             belzebu.setPeso();
@@ -100,6 +100,7 @@ int main()
         populacao = nova_populacao;
         numero_iteracoes++;
     }
+    sort(populacao.begin(), populacao.end());
     int pop_len = populacao.size();
     int cromo_len = populacao[0].cromossomo.size();
     for(int i = 0; i < 100; ++i){
