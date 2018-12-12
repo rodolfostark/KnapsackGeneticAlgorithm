@@ -63,7 +63,7 @@ void Mochila::setRepeticao()
 
     //contando repetidos
     for(int i = 0; i < len; ++i){
-        for(int j = i; j < len; ++j){
+        for(int j = 0; j < len; ++j){
             if(i!=j){
                 if(cromossomo[i].nome==cromossomo[j].nome){
                     for(int k=0; k < repete.size();k++){
