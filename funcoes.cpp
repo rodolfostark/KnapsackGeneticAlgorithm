@@ -40,3 +40,8 @@ void imprimir_itens(Item itens[MAX_ITENS], int tamanho){
         cout<< itens[i].nome << " / "<< itens[i].beneficio << " / " << itens[i].peso << endl;
     }
 }
+
+bool operator ==(const Item &i1, const Item &i2)
+{
+    return i1.nome == i2.nome;
+}

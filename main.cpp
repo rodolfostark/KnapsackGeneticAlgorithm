@@ -25,7 +25,7 @@ int main()
     int qt_itens = 0;
 
     ifstream arquivoConfig;
-    arquivoConfig.open("/home/john/workspace/BagGA/config.txt");
+    arquivoConfig.open("/home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/config.txt");
     while(arquivoConfig.good())
     {
         ConfigBagString config_bag;
@@ -47,7 +47,7 @@ int main()
         arquivoConfig.close();
     }
     ifstream arquivoItens;
-    arquivoItens.open("/home/john/workspace/BagGA/lista_itens.txt");
+    arquivoItens.open("/home/rodolfo/Documentos/C&T - COMPUTAÇÃO/4º SEMESTRE/TÓPICOS AVANÇADOS EM INFORMÁTICA I/BagGA/lista_itens.txt");
     while(arquivoItens.good()){
         ItemString item_string;
         getline(arquivoItens,item_string.nome,',');
@@ -73,6 +73,9 @@ int main()
     vector<Mochila> populacao;
     for(int i = 0;i < POPULACAO_MAX; ++i){
         Mochila deCrianca(gerarCromossomo(itens, qt_itens-1));
+        deCrianca.setPeso();
+        deCrianca.setRepeticao(itens, qt_itens);
+        deCrianca.setFitness();
         populacao.push_back(deCrianca);
     }
     while(numero_iteracoes < 20){
@@ -90,7 +93,7 @@ int main()
             Mochila deCrianca2 = populacao[r];
             Mochila belzebu = deCrianca1.crossover(deCrianca2);
             belzebu.setPeso();
-            belzebu.setRepeticao();
+            belzebu.setRepeticao(itens, qt_itens);
             belzebu.setFitness();
             nova_populacao.push_back(belzebu);
         }
@@ -101,7 +104,8 @@ int main()
     int cromo_len = populacao[0].cromossomo.size();
     for(int i = 0; i < 100; ++i){
         cout << "======SOLUÇÃO======" << endl;
-        cout << "Mochila " << i <<", Fitness: " << populacao[i].fitness << ", Peso: "<< populacao[i].peso<<", rep:"<<populacao[i].repeticao<< endl;
+        cout << "Mochila " << i << ", Fitness: " << populacao[i].fitness
+             << ", Peso: " << populacao[i].peso << ", Rep:"<<populacao[i].repeticao << endl;
         for(int j = 0; j < cromo_len-1; ++j){
             cout << "Nome: " << populacao[i].cromossomo[j].nome << endl;
             cout << "Peso: " << populacao[i].cromossomo[j].peso << endl;

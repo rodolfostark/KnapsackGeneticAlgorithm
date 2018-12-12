@@ -2,6 +2,9 @@
 #include "funcoes.h"
 #include <cmath>
 #include <algorithm>
+#include <iostream>
+
+using namespace std;
 
 Mochila::Mochila(vector<Item> _cromossomo)
 {
@@ -37,8 +40,8 @@ void Mochila::setFitness()
     float peso = 0;
     int beneficio = 0;
     for(int i = 0; i < len; ++i){
-        peso += 0.5 * cromossomo[i].peso;
-        beneficio +=2 * cromossomo[i].beneficio;
+        peso += 0.5*cromossomo[i].peso;
+        beneficio += 2*cromossomo[i].beneficio;
     }
 
     this->fitness = (beneficio/peso)*100 - 10*this->repeticao;
@@ -53,38 +56,52 @@ void Mochila::setPeso()
     }
     this->peso = peso;
 }
-void Mochila::setRepeticao()
+
+void Mochila::setRepeticao(Item itens[MAX_ITENS], int qtd_itens)
 {
-    int len = cromossomo.size();
-    int rep=0;
-
-    vector<Item> repete;
-    bool repetiu=false;
-
-    //contando repetidos
-    for(int i = 0; i < len; ++i){
-        for(int j = 0; j < len; ++j){
-            if(i!=j){
-                if(cromossomo[i].nome==cromossomo[j].nome){
-                    for(int k=0; k < repete.size();k++){
-                        if(cromossomo[i].nome == repete[k].nome){
-                            repetiu=true;
-                        }
-                    }
-                    if(!repetiu){
-                        repete.push_back(cromossomo[i]);
-                    }
-                }
-            }
+    int aparicoes = 0;
+    int aux = 0;
+    for(int i = 0; i < qtd_itens; ++i){
+        aparicoes = count(cromossomo.begin(), cromossomo.end(), itens[i]);
+        if(aparicoes > 2){
+            aux += aparicoes;
         }
     }
-    for(int k=0; k < repete.size();k++){
-        for(int i = 0; i < len; ++i){
-            if(cromossomo[i].nome == repete[k].nome){
-                rep++;
-            }
-        }
-    }
-
-    this->repeticao = rep;
+    repeticao = aux;
+    cout << "Repeticoes: " << aux << endl;
 }
+//void Mochila::setRepeticao()
+//{
+//    int len = cromossomo.size();
+//    int rep=0;
+
+//    vector<Item> repete;
+//    bool repetiu=false;
+
+//    //contando repetidos
+//    for(int i = 0; i < len; ++i){
+//        for(int j = 0; j < len; ++j){
+//            if(i!=j){
+//                if(cromossomo[i].nome==cromossomo[j].nome){
+//                    for(int k=0; k < repete.size();k++){
+//                        if(cromossomo[i].nome == repete[k].nome){
+//                            repetiu=true;
+//                        }
+//                    }
+//                    if(!repetiu){
+//                        repete.push_back(cromossomo[i]);
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    for(int k=0; k < repete.size();k++){
+//        for(int i = 0; i < len; ++i){
+//            if(cromossomo[i].nome == repete[k].nome){
+//                rep++;
+//            }
+//        }
+//    }
+
+//    this->repeticao = rep;
+//}
