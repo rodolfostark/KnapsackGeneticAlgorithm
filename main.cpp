@@ -17,7 +17,6 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
     srand(time(NULL));
-
     ConfigBag config[10];
     Item itens[MAX_ITENS];
 
@@ -83,13 +82,14 @@ int main()
         vector<Mochila> nova_populacao;
         int s = (10*POPULACAO_MAX)/100;
         for(int i = 0;i < s;i++){
+            populacao[i].fitness = populacao[i].fitness + populacao[i].fitness*0.04;
             nova_populacao.push_back(populacao[i]);
         }
         s = (90*POPULACAO_MAX)/100;
         for(int i = 0;i < s;i++){
-            int r = random_num(0, 50);
+            int r = random_num(0, 40);
             Mochila deCrianca1 = populacao[r];
-            r = random_num(0, 50);
+            r = random_num(0, 40);
             Mochila deCrianca2 = populacao[r];
             Mochila belzebu = deCrianca1.crossover(deCrianca2);
             belzebu.setPeso();

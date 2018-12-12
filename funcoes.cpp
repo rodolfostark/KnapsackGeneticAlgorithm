@@ -20,9 +20,9 @@ bool operator <(const Mochila &m1, const Mochila &m2)
 vector<Item> gerarCromossomo(Item listaItens[MAX_ITENS], int qt_itens)
 {
     vector<Item> cromossomo;
-    int len = qt_itens;
-    for(int i = 0; i < len-1; i++){
-        int  index = random_num(0 , len-1);
+    int len =  random_num(0, qt_itens);
+    for(int i = 0; i < len; i++){
+        int  index = random_num(0 , qt_itens-1);
         cromossomo.push_back(listaItens[index]);
     }
     return cromossomo;
