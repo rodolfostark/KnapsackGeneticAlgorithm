@@ -44,7 +44,7 @@ void Mochila::setFitness()
         beneficio += cromossomo[i].beneficio;
     }
 
-    this->fitness = (beneficio/peso)*100 - exp(this->repeticao);
+    this->fitness = beneficio - (peso + exp(this->repeticao));
 }
 
 void Mochila::setPeso()
@@ -63,9 +63,12 @@ void Mochila::setRepeticao(Item itens[MAX_ITENS], int qtd_itens)
     int aux = 0;
     for(int i = 0; i < qtd_itens; ++i){
         aparicoes = count(cromossomo.begin(), cromossomo.end(), itens[i]);
-        if(aparicoes >= 2){
+        if(aparicoes > 2){
             aux += aparicoes;
         }
+        else if (aparicoes == 2) {
+            aux++;
+        }
     }
-    repeticao = aux;
+    this->repeticao = aux;
 }
